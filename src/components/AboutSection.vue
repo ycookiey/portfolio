@@ -1,10 +1,10 @@
 <template>
   <section id="about">
-    <h2>自己紹介</h2>
     <div class="about-column">
       <div class="profile-section">
         <img :src="profileImageUrl" alt="プロフィール写真" class="profile-image" />
         <div class="profile-text">
+          <h2>{{ name }}</h2>
           <p>{{ introduction }}</p>
         </div>
       </div>
@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       profileImageUrl: import.meta.env.VITE_PROFILE_IMAGE_URL || '',
+      name: import.meta.env.VITE_NAME || 'ycookiey',
       introduction: import.meta.env.VITE_INTRODUCTION || '自己紹介文',
       background: import.meta.env.VITE_BACKGROUND ? JSON.parse(import.meta.env.VITE_BACKGROUND) : []
     }
