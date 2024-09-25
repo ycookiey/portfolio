@@ -3,17 +3,15 @@
     <h2>自己紹介</h2>
     <div class="about-column">
       <div class="profile-section">
-        <img src="" alt="プロフィール写真" class="profile-image" />
+        <img :src="profileImageUrl" alt="プロフィール写真" class="profile-image" />
         <div class="profile-text">
-          <p>自己紹介文</p>
+          <p>{{ introduction }}</p>
         </div>
       </div>
       <div class="education-section">
         <h3>経歴</h3>
         <ul>
-          <li>経歴1</li>
-          <li>経歴2</li>
-          <li>経歴3</li>
+          <li v-for="(item, index) in background" :key="index">{{ item }}</li>
         </ul>
       </div>
     </div>
@@ -22,7 +20,14 @@
 
 <script>
 export default {
-  name: 'AboutSection'
+  name: 'AboutSection',
+  data() {
+    return {
+      profileImageUrl: import.meta.env.VITE_PROFILE_IMAGE_URL || '',
+      introduction: import.meta.env.VITE_INTRODUCTION || '自己紹介文',
+      background: import.meta.env.VITE_BACKGROUND ? JSON.parse(import.meta.env.VITE_BACKGROUND) : []
+    }
+  }
 }
 </script>
 
