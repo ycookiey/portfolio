@@ -1,62 +1,222 @@
 <template>
   <section id="projects">
-    <h2>プロジェクト</h2>
+    <h2>経験</h2>
+    <div class="category-tabs">
+      <button
+        v-for="category in categories"
+        :key="category.id"
+        :class="['tab-button', { active: activeCategory === category.id }]"
+        @click="activeCategory = category.id"
+      >
+        {{ category.name }}
+      </button>
+    </div>
+
     <div class="projects-grid">
-      <div class="project-card" v-for="project in projects" :key="project.id">
-        <h3>{{ project.title }}</h3>
-        <p>{{ project.description }}</p>
+      <div
+        v-for="item in filteredProjects"
+        :key="item.id"
+        class="project-card"
+        @click="openModal(item)"
+      >
+        <h3>{{ item.title }}</h3>
+        <p class="period" v-if="item.period">{{ item.period }}</p>
+        <p>{{ item.shortDescription }}</p>
         <div class="tech-stack">
-          <span v-for="tech in project.technologies" :key="tech">{{ tech }}</span>
+          <span v-for="tech in item.technologies" :key="tech">{{ tech }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="selectedProject" class="modal-overlay" @click="closeModal">
+      <div class="modal-content" @click.stop>
+        <button class="close-button" @click="closeModal">&times;</button>
+
+        <div class="modal-header">
+          <div class="title-section">
+            <h2>{{ selectedProject.title }}</h2>
+            <div class="header-info">
+              <span class="category-tag">{{ getCategoryName(selectedProject.categoryId) }}</span>
+              <span v-if="selectedProject.period" class="period-tag">{{
+                selectedProject.period
+              }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="selectedProject.images?.length" class="image-slider">
+          <div class="image-container">
+            <img
+              :src="selectedProject.images[currentImageIndex].src"
+              :alt="selectedProject.images[currentImageIndex].alt"
+              class="project-image"
+            />
+            <p
+              v-if="selectedProject.images[currentImageIndex].description"
+              class="image-description"
+            >
+              {{ selectedProject.images[currentImageIndex].description }}
+            </p>
+          </div>
+          <div v-if="selectedProject.images.length > 1" class="image-navigation">
+            <button @click="previousImage" :disabled="currentImageIndex === 0">&lt;</button>
+            <button
+              @click="nextImage"
+              :disabled="currentImageIndex === selectedProject.images.length - 1"
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>概要</h3>
+          <div class="description-content">
+            {{ selectedProject.description }}
+          </div>
+        </div>
+
+        <div v-if="selectedProject.teamStructure" class="modal-section">
+          <h3>体制と役割</h3>
+          <div class="description-content">
+            {{ selectedProject.teamStructure }}
+          </div>
+        </div>
+
+        <div v-if="selectedProject.technicalExperience?.length" class="modal-section">
+          <h3>技術的経験</h3>
+          <ul>
+            <li v-for="(tech, index) in selectedProject.technicalExperience" :key="index">
+              {{ tech }}
+            </li>
+          </ul>
+        </div>
+
+        <div v-if="selectedProject.features?.length" class="modal-section">
+          <h3>主な機能</h3>
+          <ul>
+            <li v-for="(feature, index) in selectedProject.features" :key="index">
+              {{ feature }}
+            </li>
+          </ul>
+        </div>
+
+        <div v-if="selectedProject.learnings" class="modal-section">
+          <h3>得られた経験</h3>
+          <div class="description-content">
+            {{ selectedProject.learnings }}
+          </div>
+        </div>
+
+        <div class="tech-stack-full">
+          <h3>使用技術</h3>
+          <div class="tech-tags">
+            <span v-for="tech in selectedProject.technologies" :key="tech">{{ tech }}</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script>
-export default {
-  name: 'ProjectsSection',
-  data() {
-    return {
-      projects: [
-        {
-          id: 1,
-          title: '貸し借り管理アプリ',
-          description: 'Flutter と Firebase を使用したアプリ開発',
-          technologies: ['Flutter', 'Firebase', 'Dart']
-        },
-        {
-          id: 2,
-          title: 'ゲーム関連サイト',
-          description: 'Next.js を用いた Web アプリケーション開発',
-          technologies: ['Next.js', 'React', 'TypeScript']
-        }
-      ]
-    }
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { categories, projects } from '../data/projects'
+import type { Project } from '../types/project'
+
+const selectedProject = ref<Project | null>(null)
+const activeCategory = ref('work')
+const currentImageIndex = ref(0)
+
+const filteredProjects = computed(() => {
+  return projects.filter((proj) => proj.categoryId === activeCategory.value)
+})
+
+const getCategoryName = (categoryId: string) => {
+  const category = categories.find((c) => c.id === categoryId)
+  return category ? category.name : ''
+}
+
+const openModal = (project: Project) => {
+  selectedProject.value = project
+  currentImageIndex.value = 0
+  document.body.style.overflow = 'hidden'
+}
+
+const closeModal = () => {
+  selectedProject.value = null
+  document.body.style.overflow = 'auto'
+}
+
+const nextImage = () => {
+  if (
+    selectedProject.value?.images &&
+    currentImageIndex.value < selectedProject.value.images.length - 1
+  ) {
+    currentImageIndex.value++
+  }
+}
+
+const previousImage = () => {
+  if (currentImageIndex.value > 0) {
+    currentImageIndex.value--
   }
 }
 </script>
 
 <style scoped>
+.category-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  background-color: #42b983;
+  color: white;
+}
+
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
 .project-card {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 1.5rem;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.project-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.project-card .period {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 0.5rem;
 }
 
 .tech-stack {
@@ -67,10 +227,226 @@ export default {
 }
 
 .tech-stack span {
-  background-color: #e0e0e0;
-  color: #333;
-  padding: 0.25rem 0.5rem;
+  background-color: #f5f5f5;
+  color: #42b983;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 2rem;
+}
+
+.modal-header {
+  margin-bottom: 2rem;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.category-tag,
+.period-tag {
+  padding: 0.25rem 0.75rem;
   border-radius: 15px;
   font-size: 0.9em;
+}
+
+.category-tag {
+  background-color: #42b983;
+  color: white;
+}
+
+.period-tag {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: #f0f0f0;
+}
+
+.modal-section {
+  margin-bottom: 2rem;
+}
+
+.modal-section h3 {
+  color: #42b983;
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+}
+
+.description-content {
+  white-space: pre-line;
+  line-height: 1.6;
+  color: #2c3e50;
+}
+
+.modal-section ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.tech-stack-full {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.tech-tags span {
+  background-color: #f5f5f5;
+  color: #42b983;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* 画像スライダー */
+.image-slider {
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.image-container {
+  position: relative;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-description {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-style: italic;
+  color: #666;
+}
+
+.image-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.image-navigation button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #42b983;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.image-navigation button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.image-navigation button:hover:not(:disabled) {
+  background-color: #3aa876;
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-stack span {
+    padding: 0.2rem 0.5rem;
+  }
+}
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px 0;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(66, 185, 131, 0.5);
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(66, 185, 131, 0.8);
 }
 </style>
