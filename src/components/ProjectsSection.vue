@@ -125,9 +125,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { categories, projects } from '../data/projects'
 import type { Project } from '../types/project'
+import {
+  CATEGORY_STORAGE_KEY_PREFIX,
+  PROJECT_STORAGE_KEY_PREFIX,
+  getFromStorage,
+  saveToStorage,
+  clearAllClickedStates
+} from '../utils/storage'
 
 const selectedProject = ref<Project | null>(null)
 const activeCategory = ref('work')
@@ -135,22 +142,28 @@ const currentImageIndex = ref(0)
 const clickedCategories = ref<Record<string, boolean>>({})
 const clickedProjects = ref<Record<number, boolean>>({})
 
-const CATEGORY_STORAGE_KEY_PREFIX = 'portfolio_category_clicked_'
-const PROJECT_STORAGE_KEY_PREFIX = 'portfolio_project_clicked_'
+function handleTabClosing(event: BeforeUnloadEvent) {
+  clearAllClickedStates()
+}
 
 onMounted(() => {
   categories.forEach((category) => {
-    const hasClicked =
-      localStorage.getItem(`${CATEGORY_STORAGE_KEY_PREFIX}${category.id}`) === 'true'
+    const hasClicked = getFromStorage(`${CATEGORY_STORAGE_KEY_PREFIX}${category.id}`, false)
     clickedCategories.value[category.id] = hasClicked
   })
 
   projects.forEach((project) => {
-    const hasClicked = localStorage.getItem(`${PROJECT_STORAGE_KEY_PREFIX}${project.id}`) === 'true'
+    const hasClicked = getFromStorage(`${PROJECT_STORAGE_KEY_PREFIX}${project.id}`, false)
     clickedProjects.value[project.id] = hasClicked
   })
 
   clickedCategories.value['work'] = true
+
+  window.addEventListener('beforeunload', handleTabClosing)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('beforeunload', handleTabClosing)
 })
 
 const filteredProjects = computed(() => {
@@ -175,7 +188,7 @@ const handleCategoryClick = (categoryId: string) => {
 
   if (!clickedCategories.value[categoryId]) {
     clickedCategories.value[categoryId] = true
-    localStorage.setItem(`${CATEGORY_STORAGE_KEY_PREFIX}${categoryId}`, 'true')
+    saveToStorage(`${CATEGORY_STORAGE_KEY_PREFIX}${categoryId}`, true)
   }
 }
 
@@ -186,7 +199,7 @@ const openModal = (project: Project) => {
 
   if (!clickedProjects.value[project.id]) {
     clickedProjects.value[project.id] = true
-    localStorage.setItem(`${PROJECT_STORAGE_KEY_PREFIX}${project.id}`, 'true')
+    saveToStorage(`${PROJECT_STORAGE_KEY_PREFIX}${project.id}`, true)
   }
 }
 
