@@ -21,6 +21,7 @@
         v-for="item in filteredProjects"
         :key="item.id"
         class="project-card"
+        :class="{ blink: shouldProjectBlink(item.id) }"
         @click="openModal(item)"
       >
         <h3>{{ item.title }}</h3>
@@ -132,13 +133,21 @@ const selectedProject = ref<Project | null>(null)
 const activeCategory = ref('work')
 const currentImageIndex = ref(0)
 const clickedCategories = ref<Record<string, boolean>>({})
+const clickedProjects = ref<Record<number, boolean>>({})
 
-const STORAGE_KEY_PREFIX = 'portfolio_category_clicked_'
+const CATEGORY_STORAGE_KEY_PREFIX = 'portfolio_category_clicked_'
+const PROJECT_STORAGE_KEY_PREFIX = 'portfolio_project_clicked_'
 
 onMounted(() => {
   categories.forEach((category) => {
-    const hasClicked = localStorage.getItem(`${STORAGE_KEY_PREFIX}${category.id}`) === 'true'
+    const hasClicked =
+      localStorage.getItem(`${CATEGORY_STORAGE_KEY_PREFIX}${category.id}`) === 'true'
     clickedCategories.value[category.id] = hasClicked
+  })
+
+  projects.forEach((project) => {
+    const hasClicked = localStorage.getItem(`${PROJECT_STORAGE_KEY_PREFIX}${project.id}`) === 'true'
+    clickedProjects.value[project.id] = hasClicked
   })
 
   clickedCategories.value['work'] = true
@@ -157,12 +166,16 @@ const shouldBlink = (categoryId: string) => {
   return !clickedCategories.value[categoryId]
 }
 
+const shouldProjectBlink = (projectId: number) => {
+  return !clickedProjects.value[projectId]
+}
+
 const handleCategoryClick = (categoryId: string) => {
   activeCategory.value = categoryId
 
   if (!clickedCategories.value[categoryId]) {
     clickedCategories.value[categoryId] = true
-    localStorage.setItem(`${STORAGE_KEY_PREFIX}${categoryId}`, 'true')
+    localStorage.setItem(`${CATEGORY_STORAGE_KEY_PREFIX}${categoryId}`, 'true')
   }
 }
 
@@ -170,6 +183,11 @@ const openModal = (project: Project) => {
   selectedProject.value = project
   currentImageIndex.value = 0
   document.body.style.overflow = 'hidden'
+
+  if (!clickedProjects.value[project.id]) {
+    clickedProjects.value[project.id] = true
+    localStorage.setItem(`${PROJECT_STORAGE_KEY_PREFIX}${project.id}`, 'true')
+  }
 }
 
 const closeModal = () => {
@@ -207,6 +225,21 @@ const previousImage = () => {
   }
   100% {
     background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 5px rgba(66, 185, 131, 0.2);
+  }
+}
+
+@keyframes borderBlink {
+  0% {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 5px rgba(66, 185, 131, 0.2);
+  }
+  50% {
+    border: 1px solid #42b983;
+    box-shadow: 0 0 8px rgba(66, 185, 131, 0.4);
+  }
+  100% {
     border: 1px solid #e0e0e0;
     box-shadow: 0 0 5px rgba(66, 185, 131, 0.2);
   }
@@ -257,6 +290,10 @@ const previousImage = () => {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+}
+
+.project-card.blink {
+  animation: borderBlink 2s infinite;
 }
 
 .project-card:hover {
