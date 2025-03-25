@@ -4,7 +4,7 @@
     <main class="main-content">
       <AboutSection />
       <ProjectsSection />
-      <SkillsSection />
+      <!-- <SkillsSection /> -->
     </main>
   </div>
 </template>
@@ -20,8 +20,8 @@ export default {
   components: {
     NavigationHeader,
     AboutSection,
-    ProjectsSection,
-    SkillsSection
+    ProjectsSection
+    // SkillsSection
   }
 }
 </script>
