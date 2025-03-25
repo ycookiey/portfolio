@@ -4,9 +4,10 @@
     <div class="skills-grid">
       <div v-for="skill in skills" :key="skill.name" class="skill-item">
         <div class="skill-icon">
-          <img src="" :alt="skill.name" />
+          <img :src="getSkillIcon(skill.name)" :alt="skill.name" />
         </div>
         <p>{{ skill.name }}</p>
+        <div class="skill-level"></div>
       </div>
     </div>
   </section>
@@ -17,7 +18,34 @@ export default {
   name: 'SkillsSection',
   data() {
     return {
-      skills: [{ name: 'JavaScript' }, { name: 'Vue.js' }, { name: 'Flutter' }, { name: 'Python' }]
+      skills: [
+        { name: 'JavaScript' },
+        { name: 'TypeScript' },
+        { name: 'Vue.js' },
+        { name: 'React' },
+        { name: 'Flutter' },
+        { name: 'Python' },
+        { name: 'Firebase' },
+        { name: 'Git' }
+      ]
+    }
+  },
+  methods: {
+    getSkillIcon(skillName) {
+      const iconMap = {
+        JavaScript:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+        TypeScript:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+        'Vue.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+        React: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+        Flutter: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg',
+        Python: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+        Firebase: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
+        Git: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'
+      }
+
+      return iconMap[skillName] || 'https://via.placeholder.com/50'
     }
   }
 }
@@ -50,5 +78,23 @@ export default {
   width: 50px;
   height: 50px;
   margin-bottom: 0.5rem;
+  object-fit: contain;
+}
+
+.skill-level {
+  margin-top: 0.75rem;
+}
+
+@keyframes fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: var(--skill-level);
+  }
+}
+
+.skill-item:hover .skill-progress {
+  animation: fill 1s forwards;
 }
 </style>
