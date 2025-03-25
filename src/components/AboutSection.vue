@@ -23,10 +23,21 @@ export default {
   name: 'AboutSection',
   data() {
     return {
-      profileImageUrl: import.meta.env.VITE_PROFILE_IMAGE_URL || '',
+      profileImageUrl:
+        import.meta.env.VITE_PROFILE_IMAGE_URL ||
+        'https://avatars.githubusercontent.com/u/70356861?v=4',
       name: import.meta.env.VITE_NAME || 'ycookiey',
-      introduction: import.meta.env.VITE_INTRODUCTION || '自己紹介文',
-      background: import.meta.env.VITE_BACKGROUND ? JSON.parse(import.meta.env.VITE_BACKGROUND) : []
+      introduction:
+        import.meta.env.VITE_INTRODUCTION ||
+        'アプリ開発が好きで未経験の技術を積極的に取り入れることを意識しています。',
+      background: import.meta.env.VITE_BACKGROUND
+        ? JSON.parse(import.meta.env.VITE_BACKGROUND)
+        : [
+            '2022年4月 大学入学',
+            '2022年10月 研究室でアルバイト開始',
+            '2023年3月 LiberTのインターン開始',
+            '2025年3月 技育CAMP2025 ハッカソンVol.1で努力賞受賞'
+          ]
     }
   }
 }
