@@ -5,8 +5,12 @@
       <button
         v-for="category in categories"
         :key="category.id"
-        :class="['tab-button', { active: activeCategory === category.id }]"
-        @click="activeCategory = category.id"
+        :class="[
+          'tab-button',
+          { active: activeCategory === category.id },
+          { blink: shouldBlink(category.id) }
+        ]"
+        @click="handleCategoryClick(category.id)"
       >
         {{ category.name }}
       </button>
@@ -120,13 +124,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { categories, projects } from '../data/projects'
 import type { Project } from '../types/project'
 
 const selectedProject = ref<Project | null>(null)
 const activeCategory = ref('work')
 const currentImageIndex = ref(0)
+const clickedCategories = ref<Record<string, boolean>>({})
+
+const STORAGE_KEY_PREFIX = 'portfolio_category_clicked_'
+
+onMounted(() => {
+  categories.forEach((category) => {
+    const hasClicked = localStorage.getItem(`${STORAGE_KEY_PREFIX}${category.id}`) === 'true'
+    clickedCategories.value[category.id] = hasClicked
+  })
+
+  clickedCategories.value['work'] = true
+})
 
 const filteredProjects = computed(() => {
   return projects.filter((proj) => proj.categoryId === activeCategory.value)
@@ -135,6 +151,19 @@ const filteredProjects = computed(() => {
 const getCategoryName = (categoryId: string) => {
   const category = categories.find((c) => c.id === categoryId)
   return category ? category.name : ''
+}
+
+const shouldBlink = (categoryId: string) => {
+  return !clickedCategories.value[categoryId]
+}
+
+const handleCategoryClick = (categoryId: string) => {
+  activeCategory.value = categoryId
+
+  if (!clickedCategories.value[categoryId]) {
+    clickedCategories.value[categoryId] = true
+    localStorage.setItem(`${STORAGE_KEY_PREFIX}${categoryId}`, 'true')
+  }
 }
 
 const openModal = (project: Project) => {
@@ -165,6 +194,24 @@ const previousImage = () => {
 </script>
 
 <style scoped>
+@keyframes softBlink {
+  0% {
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 5px rgba(66, 185, 131, 0.2);
+  }
+  50% {
+    background-color: #eaf7f0;
+    border: 1px solid #42b983;
+    box-shadow: 0 0 8px rgba(66, 185, 131, 0.4);
+  }
+  100% {
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 5px rgba(66, 185, 131, 0.2);
+  }
+}
+
 .category-tabs {
   display: flex;
   gap: 1rem;
@@ -174,16 +221,25 @@ const previousImage = () => {
 
 .tab-button {
   padding: 0.5rem 1rem;
-  border: none;
+  border: 1px solid #e0e0e0;
   border-radius: 20px;
   background-color: #f0f0f0;
+  color: #333;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.tab-button.blink {
+  animation: softBlink 2s infinite;
 }
 
 .tab-button.active {
   background-color: #42b983;
   color: white;
+  animation: none;
+  border: 1px solid #42b983;
+  box-shadow: 0 0 8px rgba(66, 185, 131, 0.4);
 }
 
 .projects-grid {
