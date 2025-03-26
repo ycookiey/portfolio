@@ -28,7 +28,7 @@
         <p class="period" v-if="item.period">{{ item.period }}</p>
         <p>{{ item.shortDescription }}</p>
         <div class="tech-stack">
-          <span v-for="tech in item.technologies" :key="tech">{{ tech }}</span>
+          <span v-for="tech in item.technologies" :key="tech" class="tech-tag">{{ tech }}</span>
         </div>
       </div>
     </div>
@@ -128,7 +128,9 @@
         <div class="tech-stack-full">
           <h3>使用技術</h3>
           <div class="tech-tags">
-            <span v-for="tech in selectedProject.technologies" :key="tech">{{ tech }}</span>
+            <span v-for="tech in selectedProject.technologies" :key="tech" class="tech-tag">{{
+              tech
+            }}</span>
           </div>
         </div>
       </div>
@@ -347,6 +349,8 @@ const previousImage = () => {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card.blink {
@@ -373,16 +377,17 @@ const previousImage = () => {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
-.tech-stack span {
-  background-color: #f5f5f5;
-  color: #42b983;
-  padding: 0.25rem 0.75rem;
+.tech-tag {
+  color: #2c7a5d;
+  padding: 0.3rem 0.8rem;
   border-radius: 15px;
   font-size: 0.85em;
   font-weight: 500;
+  border: 1px solid #b9e6d2;
 }
 
 .modal-overlay {
@@ -502,15 +507,6 @@ const previousImage = () => {
   margin-top: 1rem;
 }
 
-.tech-tags span {
-  background-color: #f5f5f5;
-  color: #42b983;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9em;
-  font-weight: 500;
-}
-
 /* 画像スライダー */
 .image-slider {
   margin: 1.5rem 0;
@@ -603,8 +599,8 @@ const previousImage = () => {
     grid-template-columns: 1fr;
   }
 
-  .tech-stack span {
-    padding: 0.2rem 0.5rem;
+  .tech-tag {
+    padding: 0.25rem 0.6rem;
   }
 }
 .modal-content::-webkit-scrollbar {
