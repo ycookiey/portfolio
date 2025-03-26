@@ -111,7 +111,7 @@ export const projects: Project[] = [
     categoryId: 'personal',
     title: 'Omega Strikers 攻略サイト',
     shortDescription: 'ゲーム攻略支援サイト',
-    period: '2024年5月～',
+    period: '2024年5月～現在',
     description: `ゲーム"Omega Strikers"のプレイヤーをサポートする攻略サイトを開発しました。
 
     開発の背景：
@@ -227,7 +227,7 @@ export const projects: Project[] = [
     categoryId: 'personal',
     title: 'Discord/LINE Bot',
     shortDescription: '開発支援Bot',
-    period: '',
+    period: '2022年12月、2024年3月',
     description:
       'チーム開発をサポートするための機能を備えたBotを開発。Githubの更新通知、検索補助機能、ChatGPT APIを活用した会話機能を実装しました。',
     teamStructure: '個人開発',
@@ -244,7 +244,7 @@ export const projects: Project[] = [
     categoryId: 'personal',
     title: 'ショートカットツール',
     shortDescription: 'カスタムショートカットとGUIランチャー',
-    period: '',
+    period: '2022年4月',
     description:
       '開発作業を効率化するためのオリジナルショートカットキーを制作。最終的にGUIベースのランチャー機能を実装し、より使いやすいツールへと発展させました。',
     teamStructure: '個人開発',
@@ -295,7 +295,7 @@ export const projects: Project[] = [
     categoryId: 'team',
     title: '英単語暗記アプリ',
     shortDescription: 'チームでのモバイルアプリ開発',
-    period: '2024年3月～開発中',
+    period: '2024年3月～開発中断',
     description: `大学受験で既存の英単語アプリにお世話になり、その感謝が強く残っていたのと同時に、より良いものを作りたいという思いから、友人と共同で英単語暗記アプリの開発を開始しました。
 
     開発の背景：
