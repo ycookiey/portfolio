@@ -92,7 +92,7 @@ export const projects: Project[] = [
   {
     id: 4,
     categoryId: 'team',
-    title: 'Engineer Guildハッカソン',
+    title: 'Engineer Guildハッカソン2024',
     shortDescription: 'Uberライクなマッチングアプリのプロトタイプ開発',
     period: '2024年11月',
     description:
