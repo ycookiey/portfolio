@@ -282,6 +282,12 @@ export const projects: Project[] = [
         alt: '発表時に使用した信号機状態表示地図アプリのデモ映像',
         description: '発表時に使用したデモ映像'
       }
+    ],
+    xPosts: [
+      {
+        url: 'https://twitter.com/geek_pjt/status/1903738640276324471',
+        description: '技育プロジェクト'
+      }
     ]
   },
   {

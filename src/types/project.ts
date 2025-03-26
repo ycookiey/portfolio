@@ -15,6 +15,10 @@ export type Project = {
     alt: string
     description?: string
   }[]
+  xPosts?: {
+    url: string
+    description?: string
+  }[]
 }
 
 export type Category = {

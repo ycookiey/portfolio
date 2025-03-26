@@ -113,6 +113,18 @@
           </div>
         </div>
 
+        <div v-if="selectedProject.xPosts?.length" class="modal-section x-posts-section">
+          <h3>関連投稿</h3>
+          <div
+            v-for="(post, index) in selectedProject.xPosts"
+            :key="index"
+            class="x-post-container"
+          >
+            <div class="twitter-embed" v-html="getTwitterEmbedCode(post.url)"></div>
+            <p v-if="post.description" class="x-post-description">{{ post.description }}</p>
+          </div>
+        </div>
+
         <div class="tech-stack-full">
           <h3>使用技術</h3>
           <div class="tech-tags">
@@ -160,10 +172,42 @@ onMounted(() => {
   clickedCategories.value['work'] = true
 
   window.addEventListener('beforeunload', handleTabClosing)
+
+  loadTwitterWidgets()
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('beforeunload', handleTabClosing)
+})
+
+function loadTwitterWidgets() {
+  if (document.getElementById('twitter-widget-script')) return
+
+  const script = document.createElement('script')
+  script.id = 'twitter-widget-script'
+  script.src = 'https://platform.twitter.com/widgets.js'
+  script.async = true
+  script.charset = 'utf-8'
+  document.head.appendChild(script)
+}
+
+function getTwitterEmbedCode(url: string) {
+  const tweetId = url.split('/').pop() || ''
+  return `<blockquote class="twitter-tweet" data-lang="ja"><a href="${url}"></a></blockquote>`
+}
+
+watch(selectedProject, (newVal) => {
+  if (newVal && newVal.xPosts?.length) {
+    setTimeout(() => {
+      // @ts-ignore
+      if (window.twttr && window.twttr.widgets) {
+        // @ts-ignore
+        window.twttr.widgets.load()
+      } else {
+        loadTwitterWidgets()
+      }
+    }, 100)
+  }
 })
 
 const filteredProjects = computed(() => {
@@ -520,6 +564,30 @@ const previousImage = () => {
 
 .image-navigation button:hover:not(:disabled) {
   background-color: #3aa876;
+}
+
+.x-posts-section {
+  margin-top: 2rem;
+}
+
+.x-post-container {
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.twitter-embed {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.x-post-description {
+  font-style: italic;
+  color: #666;
+  text-align: center;
+  margin-top: 0.5rem;
 }
 
 @media (max-width: 768px) {
