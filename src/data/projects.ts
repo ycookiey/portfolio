@@ -73,38 +73,21 @@ export const projects: Project[] = [
     technologies: ['Python', '機械学習', '画像処理']
   },
   {
-    id: 3,
+    id: 5,
     categoryId: 'team',
-    title: '英単語暗記アプリ',
-    shortDescription: 'チームでのモバイルアプリ開発',
-    period: '2024年3月～開発中',
-    description: `大学受験で既存の英単語アプリにお世話になり、その感謝が強く残っていたのと同時に、より良いものを作りたいという思いから、友人と共同で英単語暗記アプリの開発を開始しました。
-
-    開発の背景：
-    - 既存アプリの課題(カスタマイズ性の低さ、学習履歴の可視化不足)への対応
-    - より効率的な操作の実現(辞書ライブラリによる単語入力予測、AIによる予測)
-
-    プロジェクトの特徴：
-    - MVVMアーキテクチャの採用による保守性の高い設計
-    - Firebaseを活用したリアルタイムデータ同期`,
-    teamStructure: `2人チームでの開発プロジェクト：
-
-    役割分担：
-    - 自分：モデル・ビューモデルの設計と実装、フロントエンド開発
-    - 友人：フロントエンド開発
-
-    開発プロセス：
-    - 週次オンラインミーティングでの進捗確認
-    - Discordを使用したタスク管理`,
+    title: 'ゲームイベント技術支援',
+    shortDescription: 'コミュニティイベントの技術サポート',
+    period: '2024年10月～',
+    description: `配信者様主催のOmega Strikersコミュニティ(非公式)イベントにて、ゲームデータの集計・整理システムの構築を担当しています。
+    また、ゲームイベントオーガナイザー「Upper Crab」様での大会運営のための技術ボランティアとして、応募・登録フォームの制作とアカウント機能の実装を行っています。`,
+    teamStructure: 'コミュニティイベントの技術担当として参加',
     technicalExperience: [
-      'MVVMアーキテクチャを用いたアプリケーション設計',
-      'Firebaseを活用したユーザー認証とデータベース構築',
-      'チーム開発におけるGitブランチ戦略の設計と運用',
-      'Flutterのアニメーション機能を活用したインタラクティブなUI実装',
-      'Riverpodを用いた状態管理の実装'
+      'データ集計・整理システムの設計と実装',
+      'ユーザー登録・認証システムの構築',
+      'MySQLを使用したデータベース設計'
     ],
-    learnings: ``,
-    technologies: ['Flutter', 'Firebase', 'Cloud Firestore']
+    // TODO: add technologies
+    technologies: ['HTML', 'JavaScript', 'PHP', 'MySQL']
   },
   {
     id: 4,
@@ -122,23 +105,6 @@ export const projects: Project[] = [
       'Firebaseとの連携'
     ],
     technologies: ['React Native', 'Expo', 'Express.js', 'Firebase']
-  },
-  {
-    id: 5,
-    categoryId: 'team',
-    title: 'ゲームイベント技術支援',
-    shortDescription: 'コミュニティイベントの技術サポート',
-    period: '2024年10月～',
-    description: `配信者様主催のOmega Strikersコミュニティ(非公式)イベントにて、ゲームデータの集計・整理システムの構築を担当しています。
-    また、ゲームイベントオーガナイザー「Upper Crab」様での大会運営のための技術ボランティアとして、応募・登録フォームの制作とアカウント機能の実装を行っています。`,
-    teamStructure: 'コミュニティイベントの技術担当として参加',
-    technicalExperience: [
-      'データ集計・整理システムの設計と実装',
-      'ユーザー登録・認証システムの構築',
-      'MySQLを使用したデータベース設計'
-    ],
-    // TODO: add technologies
-    technologies: ['HTML', 'JavaScript', 'PHP', 'MySQL']
   },
   {
     id: 6,
@@ -288,5 +254,39 @@ export const projects: Project[] = [
       'キーボードショートカットの実装'
     ],
     technologies: ['AutoHotKey', 'Python', 'WPF']
+  },
+  {
+    id: 3,
+    categoryId: 'team',
+    title: '英単語暗記アプリ',
+    shortDescription: 'チームでのモバイルアプリ開発',
+    period: '2024年3月～開発中',
+    description: `大学受験で既存の英単語アプリにお世話になり、その感謝が強く残っていたのと同時に、より良いものを作りたいという思いから、友人と共同で英単語暗記アプリの開発を開始しました。
+
+    開発の背景：
+    - 既存アプリの課題(カスタマイズ性の低さ、学習履歴の可視化不足)への対応
+    - より効率的な操作の実現(辞書ライブラリによる単語入力予測、AIによる予測)
+
+    プロジェクトの特徴：
+    - MVVMアーキテクチャの採用による保守性の高い設計
+    - Firebaseを活用したリアルタイムデータ同期`,
+    teamStructure: `2人チームでの開発プロジェクト：
+
+    役割分担：
+    - 自分：モデル・ビューモデルの設計と実装、フロントエンド開発
+    - 友人：フロントエンド開発
+
+    開発プロセス：
+    - 週次オンラインミーティングでの進捗確認
+    - Discordを使用したタスク管理`,
+    technicalExperience: [
+      'MVVMアーキテクチャを用いたアプリケーション設計',
+      'Firebaseを活用したユーザー認証とデータベース構築',
+      'チーム開発におけるGitブランチ戦略の設計と運用',
+      'Flutterのアニメーション機能を活用したインタラクティブなUI実装',
+      'Riverpodを用いた状態管理の実装'
+    ],
+    learnings: ``,
+    technologies: ['Flutter', 'Firebase', 'Cloud Firestore']
   }
 ]
