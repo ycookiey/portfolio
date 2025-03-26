@@ -2,7 +2,7 @@
   <header>
     <nav>
       <a @click="scrollTo('about')" href="#about">自己紹介</a>
-      <a @click="scrollTo('projects')" href="#projects">プロジェクト</a>
+      <a @click="scrollTo('projects')" href="#projects">経験</a>
       <!-- <a @click="scrollTo('skills')" href="#skills">スキル</a> -->
     </nav>
   </header>
