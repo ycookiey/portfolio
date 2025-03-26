@@ -483,7 +483,10 @@ const previousImage = () => {
 .project-image {
   width: 100%;
   height: auto;
+  max-height: 400px;
+  object-fit: contain;
   display: block;
+  margin: 0 auto;
 }
 
 .image-description {
