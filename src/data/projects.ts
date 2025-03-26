@@ -256,6 +256,35 @@ export const projects: Project[] = [
     technologies: ['AutoHotKey', 'Python', 'WPF']
   },
   {
+    id: 10,
+    categoryId: 'team',
+    title: '技育CAMP2025 ハッカソンVol.1',
+    shortDescription: '即席チームで信号機の状態を表示する地図アプリの開発',
+    period: '2025年3月',
+    description: `初めての即席チームとしてのハッカソン参加。交差点制御情報と断面交通量計測地点位置情報から信号機の状態を地図上に表示するアプリを開発しました。努力賞を受賞しました。`,
+    teamStructure:
+      '運営が組んだランダムなエンジニア5人チーム。自身を除いたメンバーはハッカソン初参加。',
+    technicalExperience: [
+      'Flutterによるクロスプラットフォーム開発',
+      'Pythonを用いたデータ分析と前処理',
+      '機械学習手法の比較と選定',
+      'Supabaseを用いたデータベース構築'
+    ],
+    learnings: `ハッカソン形式の限られた時間内での開発を通して、タスクの分担や期限に対してどのように取り組むかを実践的に学ぶことができました。
+
+特にMVP（Minimum Viable Product）を作ることを意識し、段階的に機能を拡張していくための設計アプローチの重要性を理解しました。まず動くプロトタイプを作り、その後に機能を追加していく方法が、限られた時間内で成果を出すために効果的でした。
+
+また、技術的な実装だけでなく、ユーザーインターフェースの見た目の重要性も強く認識しました。審査において、より上位の評価を得るためには、機能性だけでなく、洗練されたUIデザインも重要な要素であることを学びました。`,
+    technologies: ['Flutter', 'Supabase', 'Python', 'OpenStreetMap'],
+    images: [
+      {
+        src: 'images/geek2025-hackathon1/main.png',
+        alt: '発表時に使用した信号機状態表示地図アプリのデモ映像',
+        description: '発表時に使用したデモ映像'
+      }
+    ]
+  },
+  {
     id: 3,
     categoryId: 'team',
     title: '英単語暗記アプリ',
