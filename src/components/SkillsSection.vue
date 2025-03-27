@@ -36,7 +36,18 @@ interface SkillGroup {
 const skillGroups: SkillGroup[] = [
   {
     name: 'プログラミング言語',
-    skills: ['JavaScript', 'TypeScript', 'Python', 'Dart', 'PHP', 'HTML', 'CSS']
+    skills: [
+      'JavaScript',
+      'TypeScript',
+      'Python',
+      'Dart',
+      'PHP',
+      'HTML',
+      'CSS',
+      'AutoHotKey',
+      'HSP',
+      'VBA'
+    ]
   },
   {
     name: 'フレームワーク & ライブラリ',
@@ -48,12 +59,13 @@ const skillGroups: SkillGroup[] = [
       'React Native',
       'Express.js',
       'Prisma',
-      'Framer Motion'
+      'Framer Motion',
+      'shadcn'
     ]
   },
   {
     name: 'データベース & バックエンド',
-    skills: ['MySQL', 'Cloud Firestore', 'Supabase']
+    skills: ['MySQL', 'Cloud Firestore', 'Supabase', 'MongoDB Atlas']
   },
   {
     name: 'ツール & サービス',
@@ -61,7 +73,7 @@ const skillGroups: SkillGroup[] = [
   },
   {
     name: 'API & 外部サービス',
-    skills: ['Discord API', 'LINE API', 'ChatGPT API', 'OpenStreetMap']
+    skills: ['Discord API', 'LINE API', 'ChatGPT API', 'OpenStreetMap', 'Google Maps API']
   }
 ]
 
@@ -105,7 +117,13 @@ function getSkillIcon(skillName: string): string {
     'LINE API': 'https://www.vectorlogo.zone/logos/line/line-icon.svg',
     'ChatGPT API':
       'https://raw.githubusercontent.com/gilbarbara/logos/master/logos/openai-icon.svg',
-    OpenStreetMap: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Openstreetmap_logo.svg'
+    OpenStreetMap: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Openstreetmap_logo.svg',
+    'Google Maps API': 'https://www.vectorlogo.zone/logos/google_maps/google_maps-icon.svg',
+    'MongoDB Atlas':
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+    shadcn: 'https://ui.shadcn.com/favicon.ico',
+    AutoHotKey:
+      'https://upload.wikimedia.org/wikipedia/commons/5/5e/Modern_AutoHotkey_Logo_%28no_text%29.svg'
   }
 
   return iconMap[skillName] || 'https://via.placeholder.com/50'
