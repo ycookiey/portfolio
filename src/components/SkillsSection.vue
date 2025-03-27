@@ -45,37 +45,37 @@ const skillGroups: SkillGroup[] = [
       'HTML',
       'CSS',
       'AutoHotKey',
-      'HSP',
-      'VBA'
+      'VBA',
+      'HSP'
     ]
   },
   {
     name: 'フレームワーク & ライブラリ',
     skills: [
-      'Vue.js',
       'React',
       'Next.js',
+      'Vue.js',
       'Flutter',
       'React Native',
+      'Node.js',
       'Express.js',
-      'Prisma',
-      'Framer Motion',
-      'shadcn',
       'TailwindCSS',
-      'Node.js'
+      'shadcn',
+      'Framer Motion',
+      'Prisma'
     ]
   },
   {
     name: 'データベース & バックエンド',
-    skills: ['MySQL', 'Cloud Firestore', 'Supabase', 'MongoDB Atlas']
+    skills: ['MySQL', 'Cloud Firestore', 'MongoDB Atlas', 'Supabase']
   },
   {
     name: 'ツール & サービス',
-    skills: ['Firebase', 'Git', 'GitHub', 'Docker', 'Vercel', 'Expo', 'GCP', 'Cloudflare']
+    skills: ['Git', 'GitHub', 'Docker', 'Firebase', 'Vercel', 'Expo', 'GCP', 'Cloudflare']
   },
   {
     name: 'API & 外部サービス',
-    skills: ['Discord API', 'LINE API', 'ChatGPT API', 'OpenStreetMap', 'Google Maps API']
+    skills: ['ChatGPT API', 'Discord API', 'LINE API', 'Google Maps API', 'OpenStreetMap']
   }
 ]
 const animationComplete = ref(false)
