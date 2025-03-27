@@ -36,15 +36,32 @@ interface SkillGroup {
 const skillGroups: SkillGroup[] = [
   {
     name: 'プログラミング言語',
-    skills: ['JavaScript', 'TypeScript', 'Python', 'Dart']
+    skills: ['JavaScript', 'TypeScript', 'Python', 'Dart', 'PHP', 'HTML', 'CSS']
   },
   {
     name: 'フレームワーク & ライブラリ',
-    skills: ['Vue.js', 'React', 'Next.js', 'Flutter', 'Prisma']
+    skills: [
+      'Vue.js',
+      'React',
+      'Next.js',
+      'Flutter',
+      'React Native',
+      'Express.js',
+      'Prisma',
+      'Framer Motion'
+    ]
+  },
+  {
+    name: 'データベース & バックエンド',
+    skills: ['MySQL', 'Cloud Firestore', 'Supabase']
   },
   {
     name: 'ツール & サービス',
-    skills: ['Firebase', 'Git', 'Docker', 'Vercel']
+    skills: ['Firebase', 'Git', 'GitHub', 'Docker', 'Vercel', 'Expo']
+  },
+  {
+    name: 'API & 外部サービス',
+    skills: ['Discord API', 'LINE API', 'ChatGPT API', 'OpenStreetMap']
   }
 ]
 
@@ -68,11 +85,27 @@ function getSkillIcon(skillName: string): string {
     Python: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
     Firebase: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
     Git: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    GitHub: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
     Dart: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg',
     'Next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
     Docker: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
     Prisma: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg',
-    Vercel: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg'
+    Vercel: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg',
+    PHP: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg',
+    HTML: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+    CSS: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+    'React Native': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    'Express.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+    MySQL: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+    'Framer Motion': 'https://www.vectorlogo.zone/logos/framer/framer-icon.svg',
+    'Cloud Firestore': 'https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg',
+    Supabase: 'https://www.vectorlogo.zone/logos/supabase/supabase-icon.svg',
+    Expo: 'https://www.vectorlogo.zone/logos/expoio/expoio-icon.svg',
+    'Discord API': 'https://www.vectorlogo.zone/logos/discord/discord-tile.svg',
+    'LINE API': 'https://www.vectorlogo.zone/logos/line/line-icon.svg',
+    'ChatGPT API':
+      'https://raw.githubusercontent.com/gilbarbara/logos/master/logos/openai-icon.svg',
+    OpenStreetMap: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Openstreetmap_logo.svg'
   }
 
   return iconMap[skillName] || 'https://via.placeholder.com/50'
