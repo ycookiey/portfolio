@@ -61,12 +61,13 @@ const skillGroups: SkillGroup[] = [
       'Prisma',
       'Framer Motion',
       'shadcn',
-      'TailwindCSS'
+      'TailwindCSS',
+      'Node.js'
     ]
   },
   {
     name: 'データベース & バックエンド',
-    skills: ['MySQL', 'Cloud Firestore', 'Supabase', 'MongoDB Atlas', 'Node.js']
+    skills: ['MySQL', 'Cloud Firestore', 'Supabase', 'MongoDB Atlas']
   },
   {
     name: 'ツール & サービス',
