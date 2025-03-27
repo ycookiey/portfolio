@@ -60,23 +60,23 @@ const skillGroups: SkillGroup[] = [
       'Express.js',
       'Prisma',
       'Framer Motion',
-      'shadcn'
+      'shadcn',
+      'TailwindCSS'
     ]
   },
   {
     name: 'データベース & バックエンド',
-    skills: ['MySQL', 'Cloud Firestore', 'Supabase', 'MongoDB Atlas']
+    skills: ['MySQL', 'Cloud Firestore', 'Supabase', 'MongoDB Atlas', 'Node.js']
   },
   {
     name: 'ツール & サービス',
-    skills: ['Firebase', 'Git', 'GitHub', 'Docker', 'Vercel', 'Expo']
+    skills: ['Firebase', 'Git', 'GitHub', 'Docker', 'Vercel', 'Expo', 'GCP', 'Cloudflare']
   },
   {
     name: 'API & 外部サービス',
     skills: ['Discord API', 'LINE API', 'ChatGPT API', 'OpenStreetMap', 'Google Maps API']
   }
 ]
-
 const animationComplete = ref(false)
 
 onMounted(() => {
@@ -163,9 +163,12 @@ function getSkillIcon(skillName: string): string {
       'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
     shadcn: 'https://ui.shadcn.com/favicon.ico',
     AutoHotKey:
-      'https://upload.wikimedia.org/wikipedia/commons/5/5e/Modern_AutoHotkey_Logo_%28no_text%29.svg'
+      'https://upload.wikimedia.org/wikipedia/commons/5/5e/Modern_AutoHotkey_Logo_%28no_text%29.svg',
+    'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    TailwindCSS: 'https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg',
+    GCP: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg',
+    Cloudflare: 'https://www.vectorlogo.zone/logos/cloudflare/cloudflare-icon.svg'
   }
-
   return iconMap[skillName] || generateSvgIcon(skillName)
 }
 </script>
