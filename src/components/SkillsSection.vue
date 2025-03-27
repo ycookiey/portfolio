@@ -85,6 +85,46 @@ onMounted(() => {
   }, 500)
 })
 
+function generateSvgIcon(skillName: string): string {
+  const initials = skillName
+    .split(/[\s.-]+/)
+    .map((word) => word[0])
+    .join('')
+    .substring(0, 2)
+    .toUpperCase()
+
+  const getHashCode = (str: string) => {
+    let hash = 0
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash)
+    }
+    return hash
+  }
+
+  const intToRGB = (i: number) => {
+    const c = (i & 0x00ffffff).toString(16).padStart(6, '0')
+    return `#${c}`
+  }
+
+  const bgColor = intToRGB(getHashCode(skillName))
+
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+      <rect width="50" height="50" fill="${bgColor}" />
+      <text x="25" y="25" dy=".3em" 
+        fill="white" 
+        font-family="Arial, sans-serif" 
+        font-size="20" 
+        text-anchor="middle" 
+        font-weight="bold">
+        ${initials}
+      </text>
+    </svg>
+  `
+
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+}
+
 function getSkillIcon(skillName: string): string {
   const iconMap: Record<string, string> = {
     JavaScript:
@@ -126,7 +166,7 @@ function getSkillIcon(skillName: string): string {
       'https://upload.wikimedia.org/wikipedia/commons/5/5e/Modern_AutoHotkey_Logo_%28no_text%29.svg'
   }
 
-  return iconMap[skillName] || 'https://via.placeholder.com/50'
+  return iconMap[skillName] || generateSvgIcon(skillName)
 }
 </script>
 
