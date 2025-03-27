@@ -6,6 +6,20 @@
         <div class="profile-text">
           <h2>{{ name }}</h2>
           <p>{{ introduction }}</p>
+          <div class="social-links">
+            <a
+              href="https://github.com/ycookiey"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link github"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                alt="GitHub"
+              />
+              GitHub
+            </a>
+          </div>
         </div>
       </div>
       <div class="education-section">
@@ -71,6 +85,40 @@ export default {
 .profile-text,
 .education-section {
   flex: 1;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-link img {
+  width: 20px;
+  height: 20px;
+}
+
+.social-link.github:hover {
+  background-color: #f5f5f5;
+  color: #171515;
 }
 
 ul {
