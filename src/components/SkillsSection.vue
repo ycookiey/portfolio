@@ -67,11 +67,22 @@ const skillGroups: SkillGroup[] = [
   },
   {
     name: 'データベース & バックエンド',
-    skills: ['MySQL', 'Cloud Firestore', 'MongoDB Atlas', 'Supabase']
+    skills: ['MySQL', 'Cloud Firestore', 'MongoDB Atlas', 'Supabase', 'dynamodb']
   },
   {
     name: 'ツール & サービス',
-    skills: ['Git', 'GitHub', 'Docker', 'Firebase', 'Vercel', 'Expo', 'GCP', 'Cloudflare']
+    skills: [
+      'Git',
+      'GitHub',
+      'Docker',
+      'Firebase',
+      'Vercel',
+      'Expo',
+      'GCP',
+      'Cloudflare',
+      'AWS',
+      'lambda'
+    ]
   },
   {
     name: 'API & 外部サービス',
@@ -168,7 +179,10 @@ function getSkillIcon(skillName: string): string {
     'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
     TailwindCSS: 'https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg',
     GCP: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg',
-    Cloudflare: 'https://www.vectorlogo.zone/logos/cloudflare/cloudflare-icon.svg'
+    Cloudflare: 'https://www.vectorlogo.zone/logos/cloudflare/cloudflare-icon.svg',
+    AWS: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
+    lambda: 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos/aws-lambda.svg',
+    dynamodb: 'https://raw.githubusercontent.com/gilbarbara/logos/master/logos/aws-dynamodb.svg'
   }
   return iconMap[skillName] || generateSvgIcon(skillName)
 }
