@@ -282,10 +282,48 @@ export const projects: Project[] = [
         alt: '発表時に使用した信号機状態表示地図アプリのデモ映像',
         description: '発表時に使用したデモ映像'
       }
+    ]
+  },
+  {
+    id: 11,
+    categoryId: 'team',
+    title: '技育CAMP2025 ハッカソンVol.2',
+    shortDescription: '手持ちの食材情報から賞味期限、レシピ、栄養を管理するアプリの開発',
+    period: '2025年4月',
+    description: `友人と2人チームでハッカソンに参加。新しい技術への挑戦とUIにこだわり、受賞を狙いました。しかし、機能面は食材保存までの実装に留まりました。
+    Github Actionsを使用してTypeScriptをコンパイルし、lambdaにデプロイするCDパイプラインを構築しました。
+    Dockerの運用に初挑戦し、共通の開発環境を構築しました。これにより、メンバー間の環境差を解消し、個人的には別端末でのPCでの開発が容易になりました。
+    AWSの運用に初挑戦し、DynamoDBとLambda Function URLsを使用したサーバーレスアーキテクチャの構築をしました。無期限無料枠にこだわり、継続開発する土台を作りました。
+    `,
+    teamStructure: `インターンに一緒に参加していた友人と2人チーム。
+    役割分担：
+    - 自分：フロントエンド開発、要件定義、設計、UIデザイン、タスク管理
+    - 友人：バックエンド開発`,
+    technicalExperience: [
+      'DynamoDBを使用したデータベース設計',
+      'Lambda Function URLsを用いたAPIの実装',
+      'Github Actionsを使用したCDパイプラインの構築'
+    ],
+    learnings: `
+    DockerやAWSを実際に使い、これらの実用性を実感し、苦手意識を克服することができました。
+    指示の解釈を相手に任せるのではなく、相手に伝わるように説明することの重要性を学びました。;
+    `,
+    technologies: ['Next.js', 'TypeScript', 'lambda', 'dynamodb', 'Docker'],
+    images: [
+      {
+        src: 'images/geek2025-hackathon2/meals.gif',
+        alt: '食事記録画面',
+        description: '食事記録画面'
+      },
+      {
+        src: 'images/geek2025-hackathon2/dashboard.png',
+        alt: '食事管理アプリのメイン画面',
+        description: 'メイン画面'
+      }
     ],
     xPosts: [
       {
-        url: 'https://twitter.com/geek_pjt/status/1903738640276324471',
+        url: 'https://twitter.com/geek_pjt/status/1908797993136120162',
         description: '技育プロジェクト'
       }
     ]
